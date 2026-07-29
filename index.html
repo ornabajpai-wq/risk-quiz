@@ -309,7 +309,7 @@
   </form>
 
   <div id="result">
-    <div class="result-eyebrow">Your pattern</div>
+    <div class="result-eyebrow">Your Risk Scale</div>
     <h2 id="resultTitle"></h2>
     <p id="resultScore" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--calm);font-weight:600;margin-bottom:14px;"></p>
     <p id="resultText"></p>
@@ -355,16 +355,16 @@
 
     let title, text;
     if(sum <= 8){
-      title = "Cautious & steady";
+      title = "Risk Averse";
       text = "You value stability and predictability. Sudden shifts unsettle you, and you'd rather protect what you have than chase a bigger, riskier upside.";
     } else if(sum <= 12){
-      title = "Measured & careful";
+      title = "Conservative";
       text = "You lean toward steady, low-surprise progress, but you can tolerate small dips if the path forward still feels reasonably safe.";
     } else if(sum <= 16){
-      title = "Balanced & resilient";
+      title = "Moderate";
       text = "You're comfortable with real ups and downs in pursuit of better outcomes, and setbacks don't easily shake your commitment to a plan.";
     } else {
-      title = "Bold & high-conviction";
+      title = "High";
       text = "You're drawn to the biggest upside and can stomach real volatility along the way. Swings don't rattle you — they're just part of the process.";
     }
 
