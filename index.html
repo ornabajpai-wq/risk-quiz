@@ -237,6 +237,15 @@
   </header>
 
   <form id="quizForm">
+    <div class="question" data-q="0">
+      <div class="q-head">
+        <span class="q-num">—</span>
+        <span class="q-text">What's your name?</span>
+      </div>
+      <input type="text" id="nameInput" name="playerName" placeholder="Enter your name" autocomplete="off"
+        style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);background:#fff;outline:none;transition:border-color .15s ease;">
+    </div>
+
     <div class="question" data-q="1">
       <div class="q-head">
         <span class="q-num">01</span>
@@ -322,11 +331,14 @@
   const progressNote = document.getElementById('progressNote');
   const marker = document.getElementById('marker');
 
+  const nameInput = document.getElementById('nameInput');
+
   function updateProgress(){
     const answered = new Set();
     form.querySelectorAll('input[type=radio]:checked').forEach(i => answered.add(i.name));
-    progressNote.textContent = answered.size + ' of 5 answered';
-    submitBtn.disabled = answered.size < 5;
+    const nameFilled = nameInput.value.trim().length > 0;
+    progressNote.textContent = answered.size + ' of 5 answered' + (nameFilled ? '' : ' · name required');
+    submitBtn.disabled = answered.size < 5 || !nameFilled;
 
     // update spectrum marker as a live average preview
     let sum = 0, count = 0;
@@ -337,6 +349,10 @@
       marker.style.left = pct + '%';
     }
   }
+
+  nameInput.addEventListener('input', updateProgress);
+  nameInput.addEventListener('focus', () => nameInput.style.borderColor = 'var(--calm)');
+  nameInput.addEventListener('blur', () => nameInput.style.borderColor = 'var(--line)');
 
   form.querySelectorAll('.option').forEach(opt => {
     opt.addEventListener('click', () => {
